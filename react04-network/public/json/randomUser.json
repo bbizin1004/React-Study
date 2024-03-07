@@ -1,0 +1,42 @@
+{
+  "results": [
+    {
+      "gender": "male",
+      "name": { "title": "Mr", "first": "Ernesto", "last": "Naranjo" },
+      "location": {
+        "street": { "number": 4707, "name": "Eje vial México" },
+        "city": "Mazatecochco",
+        "state": "San Luis Potosí",
+        "country": "Mexico",
+        "postcode": 90087,
+        "coordinates": { "latitude": "24.0173", "longitude": "-176.4154" },
+        "timezone": {
+          "offset": "+8:00",
+          "description": "Beijing, Perth, Singapore, Hong Kong"
+        }
+      },
+      "email": "ernesto.naranjo@example.com",
+      "login": {
+        "uuid": "49d797be-fc18-480f-af1e-898efeb727eb",
+        "username": "bigwolf593",
+        "password": "whocares",
+        "salt": "0UfGGc7j",
+        "md5": "5c2988f9ea28c40f369249ff0be63f19",
+        "sha1": "0a7faed2e396e5e177192cb5b0b85b1fd2fbcdaa",
+        "sha256": "929f26f440650782f76a72f44721e000ccbd881680ef76e8d02ad00e472e64c1"
+      },
+      "dob": { "date": "1980-01-29T17:38:10.055Z", "age": 44 },
+      "registered": { "date": "2012-05-08T17:25:58.676Z", "age": 11 },
+      "phone": "(698) 641 4877",
+      "cell": "(685) 294 7613",
+      "id": { "name": "NSS", "value": "68 57 05 1656 5" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/87.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/87.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/87.jpg"
+      },
+      "nat": "MX"
+    }
+  ],
+  "info": { "seed": "eba7b42ea24dc963", "results": 1, "page": 1, "version": "1.4" }
+}
