@@ -16,10 +16,8 @@ function List(props) {
   //   );
   // }
 
-  /*
-  퀴즈] 기존 for문으로 구현했던 부분을 map()함수를 이용해서 구현하시오.
-  */
 
+  /*퀴즈] 기존 for문으로 구현했던 부분을 map()함수를 이용해서 구현하시오.*/
   const lists= props.topics.map((row,idx)=> {
     return (
       <tr key={row.no}>
