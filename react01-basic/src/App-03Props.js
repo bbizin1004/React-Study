@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 /*
 props(프롭스)
@@ -49,13 +49,15 @@ function MyBody(props) {
 
 function App() {
   //props로 사용할 배열 변수 선언
-  const myData1 = ['HTML5', 'CSS3', 'Javascript', 'jQuery'];
-  const myData2 = ['Java', 'Oracle', 'JSP', 'Spring Boot'];
+  const myData1 = ["HTML5", "CSS3", "Javascript", "jQuery"];
+  const myData2 = ["Java", "Oracle", "JSP", "Spring Boot"];
 
   return (
-    <div className='App'>
+    <div className="App">
       <h2>React - Props 전달하기</h2>
-      {/* MyBody 컴포넌트로 2개의 props를 전달한다. 전달시에는 HTMl의 속성과 같이 "속성명=값"의 형태로 기술하면 된다. 만약 변수가 아닌 일반적인 텍스트를 전달할때는 propData1= "가나다"와 같이 더블쿼테이션을 사용하면 된다.*/}
+      {/* MyBody 컴포넌트로 2개의 props를 전달한다. 전달시에는 HTMl의 속성과 같이
+       "속성명=값"의 형태로 기술하면 된다. 만약 변수가 아닌 일반적인 텍스트를
+        전달할때는 propData1= "가나다"와 같이 더블쿼테이션을 사용하면 된다.*/}
       <MyBody propData1={myData1} propData2={myData2}></MyBody>
     </div>
   );

@@ -16,7 +16,9 @@ function App() {
   //각 컴포넌트를 저장하기 위한 변수
   let contents = '';
   //각 mode에 따라 컴포넌트를 변수에 할당한다.
-  //** 3가지 mode에서 공통적으로 props를 통해 state를 변경할 수 있는 기능의 화살표 함수를 정의하고 있다. 자식 컴포넌트에서는 changeMode()를 호출해서 해당 기능을 실행한다. */
+  /** 3가지 mode에서 공통적으로 props를 통해 state를 변경할 수 있는
+   기능의 화살표 함수를 정의하고 있다. 자식 컴포넌트에서는 changeMode()를
+    호출해서 해당 기능을 실행한다. */
   if(mode==="view"){
     contents = <ViewComponent changeMode={(pmode)=>{setMode(pmode)}}>
     </ViewComponent>;
