@@ -1,36 +1,38 @@
-import "./App.css";
-import { React, useState, useEffect } from "react";
+import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function Contacts(props) {
-  var [myJSON, setmyJSON] = useState({ contacts: [] });
+function ListTop(props) {
+  var [myList, setMyList] = useState({ contacts: [] });
 
   useEffect(function () {
-    fetch("https://sample.bmaster.kro.kr/contacts?pageno=2")
+    //JSON 가져오기
+    fetch('https://sample.bmaster.kro.kr/contacts?pageno=2')
       .then((result) => {
         console.log(result);
         return result.json();
       })
       .then((json) => {
         console.log(json);
-        setmyJSON(json);
+        setMyList(json);
       });
     return () => {
-      console.log("useEffect실행 ==>컴포넌트 언마운트");
+      console.log('useEffect실행 ==>컴포넌트 언마운트');
     };
   }, []);
 
-  let cTag = myJSON.contacts.map((data) => {
+  let listTag = myList.contacts.map((data) => {
     return (
       <tr key={data.no}>
         <td>
-          <img src={data.photo} alt="{data.no}" />
+          <img src={data.photo} alt='{data.no}' width='80px' />
         </td>
         <td>
           <a
-            href="/"
+            href={data.no}
+            data-id={data.no}
             onClick={(e) => {
               e.preventDefault();
-              props.onProfile(data);
+              props.myLinkClick(e.target.dataset.id);
             }}
           >
             {data.name}
@@ -40,19 +42,19 @@ function Contacts(props) {
     );
   });
 
+  console.log('#Life', 'LifeGood==>2.return실행(render와 동일)');
+
   return (
     <>
-      <h2>연락처 API 연동하기</h2>
-
-      <div className="left">
-        <table border="1" width="300">
+      <div className='left'>
+        <table border='1' width='300'>
           <thead>
             <tr>
               <th>photo</th>
               <th>name</th>
             </tr>
           </thead>
-          <tbody>{cTag}</tbody>
+          <tbody>{listTag}</tbody>
         </table>
       </div>
     </>
@@ -60,29 +62,50 @@ function Contacts(props) {
 }
 
 const ContactInfo = (props) => {
+  //props로 전달된 JSON객체를 파싱해서 내용을 출력한다.
   return (
-    <div className="right">
-      <h3></h3>
-      <p>no:</p>
-      <p>name:</p>
-      <p>tel:</p>
-      <p>address:</p>
-      <p>photo:</p>
+    <div id='contactView'>
+      <h2>{props.myResult.name}</h2>
+      <ul>
+        <li>no:{props.myResult.no}</li>
+        <li>name:{props.myResult.name}</li>
+        <li>tel:{props.myResult.tel}</li>
+        <li>address:{props.myResult.address}</li>
+        <li>
+          photo: <img src={props.myResult.photo} alt='{props.myResult.photo}' className='myImg' />{' '}
+        </li>
+      </ul>
     </div>
   );
 };
 
 function App() {
-  var [info, setInfo] = useState({});
+  //객체의 내용을 출력할 용도의 state(초기값은 빈 객체)
+  var [myResult, setMyResult] = useState({});
 
   return (
-    <div className="App">
-      <Contacts
-        onProfile={(sData) => {
-          console.log(sData);
-        }}
-      ></Contacts>
-      <ContactInfo info={info}></ContactInfo>
+    <div className='container'>
+      <h2>연락처 API 연동하기</h2>
+      <div className='row'>
+        <div className='list col-sm-6'>
+          <ListTop
+            myLinkClick={(no) => {
+              console.log('클릭', no);
+              fetch('https://sample.bmaster.kro.kr/contacts/' + no)
+                .then((result) => {
+                  return result.json();
+                })
+                .then((json) => {
+                  console.log('결과', json);
+                  setMyResult(json);
+                });
+            }}
+          ></ListTop>
+        </div>
+      </div>
+      <div className='list col-sm-6'>
+        <ContactInfo myResult={myResult}></ContactInfo>
+      </div>
     </div>
   );
 }

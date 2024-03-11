@@ -111,7 +111,7 @@ function ArticleList(props) {
   );
 }
 
-//게시판으 내용보기
+//게시판의 내용보기
 function ArticleView(props){
   return (
     <article>
@@ -138,7 +138,7 @@ function ArticleView(props){
   )
 }
 
-//게시판으 작성하기
+//게시판 작성하기
 function ArticleWrite(props){
   return (
     <article>

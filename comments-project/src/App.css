@@ -1,0 +1,21 @@
+#boardTable{
+  border: 1px solid gray; border-collapse: collapse; width: 90%;
+  margin-bottom: 10px;
+}
+#boardTable tr{
+  text-align: center;
+}
+#boardTable th{
+  background-color: azure;
+}
+#boardTable th, td{
+  border: 1px solid gray;
+}
+/* #boardTable.emptyList{
+  text-align: center;
+} */
+#boardTable td.subject{
+  text-align: left;
+}
+#btn{height: 100px;}
+
