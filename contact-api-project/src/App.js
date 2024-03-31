@@ -1,14 +1,16 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
+//myData.json파일의 내용으로 목록을 만들어줄 컴포넌트
 function ListTop(props) {
+  //빈 배열로 state를 선언(최초 실행시에는 테이터가 없는 상태)
   var [myList, setMyList] = useState({ contacts: [] });
 
+  //1차 렌더링이 된 이후에 json파일을 요청하여 비동기로 내용을 가져온다.
   useEffect(function () {
     //JSON 가져오기
-    fetch('https://sample.bmaster.kro.kr/contacts?pageno=2')
+    fetch('https://sample.bmaster.kro.kr/contacts?pageno=3')
       .then((result) => {
-        console.log(result);
         return result.json();
       })
       .then((json) => {
@@ -20,64 +22,125 @@ function ListTop(props) {
     };
   }, []);
 
-  let listTag = myList.contacts.map((data) => {
-    return (
+
+  //쌤이 한거
+  var listTag = [];
+  for(var i =0; i<myList.contacts.length; i++){
+    var data = myList.contacts[i];
+    listTag.push(
       <tr key={data.no}>
-        <td>
-          <img src={data.photo} alt='{data.no}' width='80px' />
-        </td>
-        <td>
-          <a
-            href={data.no}
-            data-id={data.no}
-            onClick={(e) => {
-              e.preventDefault();
-              props.myLinkClick(e.target.dataset.id);
-            }}
-          >
-            {data.name}
-          </a>
-        </td>
+        <td><img src={data.photo} alt='{data.name}' width='80px' /></td>
+        <td><a href={data.no} data-id={data.no} onClick={(e)=>{
+          e.preventDefault();
+          props.myLinkClick(e.target.dataset.id);
+
+        }}>{data.name}</a></td>
       </tr>
     );
-  });
-
-  console.log('#Life', 'LifeGood==>2.return실행(render와 동일)');
-
-  return (
-    <>
-      <div className='left'>
-        <table border='1' width='300'>
-          <thead>
-            <tr>
-              <th>photo</th>
-              <th>name</th>
-            </tr>
-          </thead>
-          <tbody>{listTag}</tbody>
-        </table>
-      </div>
-    </>
+  }
+  return(
+    <div id='contactList'>
+      <table border='1' className='table table-bordered table-striped'>
+        <colgroup><col width="20%"/><col width="*"/></colgroup>
+        <thead>
+          <tr className='text-center'>
+            <th>photo</th>
+            <th>name</th>
+          </tr>
+        </thead>
+        <tbody>{listTag}</tbody>
+      </table>
+    </div>
   );
 }
 
-const ContactInfo = (props) => {
-  //props로 전달된 JSON객체를 파싱해서 내용을 출력한다.
-  return (
-    <div id='contactView'>
-      <h2>{props.myResult.name}</h2>
-      <ul>
-        <li>no:{props.myResult.no}</li>
-        <li>name:{props.myResult.name}</li>
-        <li>tel:{props.myResult.tel}</li>
-        <li>address:{props.myResult.address}</li>
-        <li>
-          photo: <img src={props.myResult.photo} alt='{props.myResult.photo}' className='myImg' />{' '}
-        </li>
-      </ul>
-    </div>
-  );
-};
+  const ContentBody = (props) =>{
+    return(
+      <div id='contactView'>
+        <h2>{props.myResult.name}</h2>
+        <ul className='list-group list-group-flush list-hover'>
+          <li className='list-group list-group-item-action'>
+            no : {props.myResult.no}
+          </li>
+          <li className='list-group list-group-item-action'>
+            name : {props.myResult.name}
+          </li>
+          <li className='list-group list-group-item-action'>
+            tel : {props.myResult.tel}
+          </li>
+          <li className='list-group list-group-item-action'>
+            address : {props.myResult.address}
+          </li>
+          <li className='list-group list-group-item-action'>
+            photo : <img src={props.myResult.photo}
+             alt='{props.myResult.name}' className='myImg'></img>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+
+
+
+  // 내가 한거 
+  // let listTag = myList.contacts.map((data) => {
+  //   return (
+  //     <tr key={data.no}>
+  //       <td>
+  //         <img src={data.photo} alt='{data.no}' width='80px' />
+  //       </td>
+  //       <td>
+  //         <a
+  //           href={data.no}
+  //           data-id={data.no}
+  //           onClick={(e) => {
+  //             e.preventDefault();
+  //             props.myLinkClick(e.target.dataset.id);
+  //           }}
+  //         >
+  //           {data.name}
+  //         </a>
+  //       </td>
+  //     </tr>
+  //   );
+  // });
+
+  // console.log('#Life', 'LifeGood==>2.return실행(render와 동일)');
+
+  // return (
+  //   <>
+  //     <div className='left'>
+  //       <table border='1' width='300'>
+  //         <thead>
+  //           <tr>
+  //             <th>photo</th>
+  //             <th>name</th>
+  //           </tr>
+  //         </thead>
+  //         <tbody>{listTag}</tbody>
+  //       </table>
+  //     </div>
+  //   </>
+  // );
+// }
+
+// const ContactInfo = (props) => {
+//   //props로 전달된 JSON객체를 파싱해서 내용을 출력한다.
+//   return (
+//     <div id='contactView'>
+//       <h2>{props.myResult.name}</h2>
+//       <ul>
+//         <li>no:{props.myResult.no}</li>
+//         <li>name:{props.myResult.name}</li>
+//         <li>tel:{props.myResult.tel}</li>
+//         <li>address:{props.myResult.address}</li>
+//         <li>
+//           photo: <img src={props.myResult.photo} alt='{props.myResult.photo}' className='myImg' />{' '}
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// };
 
 function App() {
   //객체의 내용을 출력할 용도의 state(초기값은 빈 객체)
@@ -104,7 +167,7 @@ function App() {
         </div>
       </div>
       <div className='list col-sm-6'>
-        <ContactInfo myResult={myResult}></ContactInfo>
+        <ContentBody myResult={myResult}></ContentBody>
       </div>
     </div>
   );

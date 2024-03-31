@@ -21,7 +21,7 @@ function nowDateStr(){
     번호는 1부터 자동부여.
     날짜는 Date객체 사용하여 현재날짜 및 시간 입력
     작성자와 내용은 사용자가 입력.
-    수정 버튼 누르면 작성폼에 기존내용 로드
+    수정 버튼 누르면 작성폼에 기존내용 로드  
     삭제는 confirm창으로 물어본 후 처리 
 */
 function App() {
@@ -90,7 +90,7 @@ function App() {
   
   return (
     <div className="App">
-      {/* <Board></Board> */}
+      <Board></Board>
       <ComList myData={myData} 
         onDelete={(pno)=>{
           console.log("삭제no", pno, typeof(pno));
